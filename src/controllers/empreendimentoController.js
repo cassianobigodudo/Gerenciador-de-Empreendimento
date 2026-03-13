@@ -36,8 +36,26 @@ const atualizar = async (req, res) => {
     }
 };
 
+const deletar = async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const empreendimentoDeletado = await empreendimentoModel.deletarEmpreendimento(id);
+        
+        if (!empreendimentoDeletado) {
+            return res.status(404).json({ erro: 'Empreendimento não encontrado.' });
+        }
+        
+        return res.status(200).json({ mensagem: 'Empreendimento removido com sucesso!', empreendimento: empreendimentoDeletado });
+    } catch (erro) {
+        console.error('Erro ao deletar:', erro);
+        return res.status(500).json({ erro: 'Erro interno ao deletar empreendimento.' });
+    }
+};
+
 module.exports = {
     criar,
     listar,
-    atualizar // <-- Exporte aqui também!
+    atualizar,
+    deletar // <-- Exporte aqui também!
 };
