@@ -15,6 +15,13 @@ const criarEmpreendimento = async (dados) => {
     return resultado.rows[0];
 };
 
+const listarEmpreendimentos = async () => {
+    const query = 'SELECT * FROM empreendimentos ORDER BY id ASC';
+    const resultado = await pool.query(query);
+    return resultado.rows;
+};
+
 module.exports = {
-    criarEmpreendimento
+    criarEmpreendimento,
+    listarEmpreendimentos 
 };

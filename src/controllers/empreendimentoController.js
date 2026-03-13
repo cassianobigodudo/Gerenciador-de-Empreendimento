@@ -10,6 +10,17 @@ const criar = async (req, res) => {
     }
 };
 
+const listar = async (req, res) => {
+    try {
+        const empreendimentos = await empreendimentoModel.listarEmpreendimentos();
+        return res.status(200).json(empreendimentos);
+    } catch (erro) {
+        console.error('Erro ao listar:', erro);
+        return res.status(500).json({ erro: 'Erro interno ao listar empreendimentos.' });
+    }
+};
+
 module.exports = {
-    criar
+    criar,
+    listar // <-- Adicione aqui!
 };
