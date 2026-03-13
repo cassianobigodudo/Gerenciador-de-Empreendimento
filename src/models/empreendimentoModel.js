@@ -38,18 +38,18 @@ const atualizarEmpreendimento = async (id, dados) => {
     const valores = [nome_empreendimento, nome_responsavel, municipio, segmento, contato, status, id];
     
     const resultado = await pool.query(query, valores);
-    return resultado.rows[0]; // Retorna o item atualizado (ou undefined se não achar o ID)
+    return resultado.rows[0]; 
 };
 
 const deletarEmpreendimento = async (id) => {
     const query = 'DELETE FROM empreendimentos WHERE id = $1 RETURNING *;';
     const resultado = await pool.query(query, [id]);
-    return resultado.rows[0]; // Retorna o que foi deletado, ou undefined se não achar
+    return resultado.rows[0]; 
 };
 
 module.exports = {
     criarEmpreendimento,
     listarEmpreendimentos,
     atualizarEmpreendimento,
-    deletarEmpreendimento // <-- Não esqueça de exportar!
+    deletarEmpreendimento 
 };

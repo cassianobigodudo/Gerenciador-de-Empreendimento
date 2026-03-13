@@ -57,5 +57,5 @@ module.exports = {
     criar,
     listar,
     atualizar,
-    deletar // <-- Exporte aqui também!
+    deletar
 };
