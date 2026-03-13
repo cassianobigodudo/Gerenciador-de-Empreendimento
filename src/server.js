@@ -1,11 +1,12 @@
 const express = require('express');
 require('dotenv').config();
 const pool = require('./config/db'); // Importando a conexão
+const empreendimentoRoutes = require('./routes/empreendimentoRoutes');
 
 const app = express();
-
-// Middleware essencial para a API entender JSON
 app.use(express.json());
+
+app.use('/empreendimentos', empreendimentoRoutes);
 
 const PORT = process.env.PORT || 3000;
 
