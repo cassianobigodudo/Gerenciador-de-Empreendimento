@@ -19,8 +19,25 @@ const listar = async (req, res) => {
         return res.status(500).json({ erro: 'Erro interno ao listar empreendimentos.' });
     }
 };
+const atualizar = async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const empreendimentoAtualizado = await empreendimentoModel.atualizarEmpreendimento(id, req.body);
+        
+        if (!empreendimentoAtualizado) {
+            return res.status(404).json({ erro: 'Empreendimento não encontrado.' });
+        }
+        
+        return res.status(200).json(empreendimentoAtualizado);
+    } catch (erro) {
+        console.error('Erro ao atualizar:', erro);
+        return res.status(500).json({ erro: 'Erro interno ao atualizar empreendimento.' });
+    }
+};
 
 module.exports = {
     criar,
-    listar // <-- Adicione aqui!
+    listar,
+    atualizar // <-- Exporte aqui também!
 };

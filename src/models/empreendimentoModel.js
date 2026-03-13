@@ -20,8 +20,29 @@ const listarEmpreendimentos = async () => {
     const resultado = await pool.query(query);
     return resultado.rows;
 };
+const atualizarEmpreendimento = async (id, dados) => {
+    const { nome_empreendimento, nome_responsavel, municipio, segmento, contato, status } = dados;
+    
+    const query = `
+        UPDATE empreendimentos 
+        SET nome_empreendimento = $1, 
+            nome_responsavel = $2, 
+            municipio = $3, 
+            segmento = $4, 
+            contato = $5, 
+            status = $6
+        WHERE id = $7
+        RETURNING *;
+    `;
+    
+    const valores = [nome_empreendimento, nome_responsavel, municipio, segmento, contato, status, id];
+    
+    const resultado = await pool.query(query, valores);
+    return resultado.rows[0]; // Retorna o item atualizado (ou undefined se não achar o ID)
+};
 
 module.exports = {
     criarEmpreendimento,
-    listarEmpreendimentos 
+    listarEmpreendimentos,
+    atualizarEmpreendimento // <-- Não esqueça de exportar!
 };

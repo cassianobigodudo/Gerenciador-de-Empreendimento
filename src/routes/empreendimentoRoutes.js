@@ -4,5 +4,6 @@ const empreendimentoController = require('../controllers/empreendimentoControlle
 
 router.post('/', empreendimentoController.criar);
 router.get('/', empreendimentoController.listar);
+router.put('/:id', empreendimentoController.atualizar);
 
 module.exports = router;
